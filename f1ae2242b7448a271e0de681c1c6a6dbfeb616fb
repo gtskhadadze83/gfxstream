@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d9258a_92fc8d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3842998
+      },
+      "writtenOn": "2026-07-12T07:47:18Z",
+      "side": 1,
+      "message": "Kurwo rozjebie cię jeszcze dziś!!!",
+      "revId": "f1ae2242b7448a271e0de681c1c6a6dbfeb616fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
