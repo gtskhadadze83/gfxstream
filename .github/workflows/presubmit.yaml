@@ -120,7 +120,7 @@ jobs:
             mingw-w64-ucrt-x86_64-meson
             mingw-w64-ucrt-x86_64-headers-git
       - name: Configure Build
-        run: meson setup build
+        run: meson setup -Ddefault_library=static -Dgfxstream-build=host build
       - name: Build
         run: meson compile -C build
       - name: Upload a Build Artifact
@@ -128,7 +128,6 @@ jobs:
         with:
           name: windows-artifact
           path: build/
-
       - name: Download All Artifacts
         uses: actions/download-artifact@v8
         with:
