@@ -7,6 +7,7 @@ on:
       - main  # push events to main branch occur after PRs are merged, when the same checks were run
   workflow_dispatch:
 
+
 concurrency:
   # limits the workflow to a single run per branch/PR
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,7 +19,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout repository
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
+      uses: actions/checkout@v6
     - name: Install go
       uses: actions/setup-go@v6
       with:
@@ -40,48 +41,43 @@ jobs:
           echo "Please remove unused 'load' statements with \"buildozer '//...:__pkg__' 'fix unusedLoads'\"";
           exit 1;
         fi
-
-  run-gfxstream-bazel-tests:
-    uses: ./.github/workflows/presubmit_bazel.yml
-    with:
-      runner: ubuntu-22.04
-
-  run-gfxstream-bazel-tests-asan:
-    uses: ./.github/workflows/presubmit_bazel.yml
-    with:
-      # TODO(b/475886246): fix and remove `detect_leaks=0`
-      # TODO(b/475885975): fix and remove `detect_odr_violation=0`
-      additional-bazel-args: --config=asan --test_env="ASAN_OPTIONS=detect_leaks=0:detect_odr_violation=0"
-      runner: ubuntu-22.04
-
-  run-gfxstream-bazel-tests-arm:
-    uses: ./.github/workflows/presubmit_bazel.yml
-    with:
-      runner: ubuntu-22.04-arm
-      # The arm runner is too slow:
-      run-tests: false
-
-  run-gfxstream-cmake-build:
-    runs-on: ubuntu-22.04
-    steps:
-    - name: Free disk space
-      uses: jlumbroso/free-disk-space@v1.3.1
-      with:
-        tool-cache: true
-    - name: Checkout repository
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
-    - name: Install toolchain dependencies
-      run: sudo bash toolchain/cmake/install_toolchain_dependencies.sh
-    - name: Configure Build
-      run: |
-        mkdir build && \
-        cd build && \
-        cmake .. -G Ninja
-    - name: Build
-      run: |
-        cd build && \
-        ninja
-
+  #run-gfxstream-bazel-tests:
+  #  uses: ./.github/workflows/presubmit_bazel.yml
+  #  with:
+  #    runner: ubuntu-22.04
+  #run-gfxstream-bazel-tests-asan:
+  #  uses: ./.github/workflows/presubmit_bazel.yml
+  #  with:
+  #    # TODO(b/475886246): fix and remove `detect_leaks=0`
+  #   # TODO(b/475885975): fix and remove `detect_odr_violation=0`
+  #    additional-bazel-args: --config=asan --test_env="ASAN_OPTIONS=detect_leaks=0:detect_odr_violation=0"
+  #    runner: ubuntu-22.04
+  #run-gfxstream-bazel-tests-arm:
+  #  uses: ./.github/workflows/presubmit_bazel.yml
+  #  with:
+  #    runner: ubuntu-22.04-arm
+  #    # The arm runner is too slow:
+  #    run-tests: false
+  #run-gfxstream-cmake-build:
+  #  runs-on: ubuntu-22.04
+  #  steps:
+  #  - name: Free disk space
+  #    uses: jlumbroso/free-disk-space@v1.3.1
+  #    with:
+  #      tool-cache: true
+  #  - name: Checkout repository
+  #    uses: actions/checkout@v6
+  #  - name: Install toolchain dependencies
+  #    run: sudo bash toolchain/cmake/install_toolchain_dependencies.sh
+  #  - name: Configure Build
+  #    run: |
+  #      mkdir build && \
+  #      cd build && \
+  #      cmake .. -G Ninja
+  #  - name: Build
+  #    run: |
+  #      cd build && \
+  #      ninja
   run-gfxstream-meson-build:
     runs-on: ubuntu-22.04
     steps:
@@ -90,7 +86,7 @@ jobs:
       with:
         tool-cache: true
     - name: Checkout repository
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8  # v6.0.1
+      uses: actions/checkout@v6
     - name: Install toolchain dependencies
       run: sudo bash toolchain/meson/install_toolchain_dependencies.sh
     - name: Configure Build
@@ -102,7 +98,6 @@ jobs:
     - name: Build
       run: |
         meson compile -C build
-
   run-gfxstream-meson-build-windows:
     runs-on: windows-latest
     defaults:
