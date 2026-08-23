@@ -2101,10 +2101,10 @@ bool GLEScontext::glGetFixedv(GLenum pname, GLfixed *params)
 
     GLint* iParams = new GLint[numParams];
     if (numParams>0 && glGetIntegerv(pname,iParams)) {
-        while(numParams >= 0)
+        while(numParams > 0)
         {
-            params[numParams] = I2X(iParams[numParams]);
             numParams--;
+            params[numParams] = I2X(iParams[numParams]);
         }
         result = true;
     }
@@ -2120,10 +2120,10 @@ bool GLEScontext::glGetFloatv(GLenum pname, GLfloat *params)
 
     GLint* iParams = new GLint[numParams];
     if (numParams>0 && glGetIntegerv(pname,iParams)) {
-        while(numParams >= 0)
+        while(numParams > 0)
         {
-            params[numParams] = (GLfloat)iParams[numParams];
             numParams--;
+            params[numParams] = (GLfloat)iParams[numParams];
         }
         result = true;
     }
