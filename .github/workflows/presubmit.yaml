@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@v6
     - name: Install go
-      uses: actions/setup-go@v7
+      uses: actions/setup-go@v6
       with:
-        go-version: '1.27.0'
+        go-version: '1.25.0'
     - name: Install buildozer
       run: go install github.com/bazelbuild/buildtools/buildozer@latest
     - name: Validate formatting
@@ -79,14 +79,14 @@ jobs:
   #      cd build && \
   #      ninja
   run-gfxstream-meson-build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Free disk space
       uses: jlumbroso/free-disk-space@v1.3.1
       with:
         tool-cache: true
     - name: Checkout repository
-      uses: actions/checkout@v7
+      uses: actions/checkout@v6
     - name: Install toolchain dependencies
       run: sudo bash toolchain/meson/install_toolchain_dependencies.sh
     - name: Configure Build
@@ -105,7 +105,7 @@ jobs:
         shell: msys2 {0}
     steps:
       - name: Checkout current PR branch
-        uses: actions/checkout@v7
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: msys2/setup-msys2@v2
