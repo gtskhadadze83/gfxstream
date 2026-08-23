@@ -17,6 +17,7 @@ on:
       run-tests:
         type: boolean
         default: true
+  workflow_dispatch:
 
 jobs:
   presubmit_bazel_workflow:
