@@ -1438,6 +1438,7 @@ class VkDecoderGlobalState::Impl {
                                                 VkFormatProperties* pFormatProperties) {
         auto physicalDevice = unbox_VkPhysicalDevice(boxed_physicalDevice);
         auto vk = dispatch_VkPhysicalDevice(boxed_physicalDevice);
+        if (!vk) return;
         getPhysicalDeviceFormatPropertiesCore<VkFormatProperties>(
             [vk](VkPhysicalDevice physicalDevice, VkFormat format,
                  VkFormatProperties* pFormatProperties) {
@@ -1453,6 +1454,7 @@ class VkDecoderGlobalState::Impl {
                                                  VkFormatProperties2* pFormatProperties) {
         auto physicalDevice = unbox_VkPhysicalDevice(boxed_physicalDevice);
         auto vk = dispatch_VkPhysicalDevice(boxed_physicalDevice);
+        if (!vk) return;
 
         enum class WhichFunc {
             kGetPhysicalDeviceFormatProperties,
