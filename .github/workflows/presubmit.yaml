@@ -128,3 +128,10 @@ jobs:
         with:
           name: windows-artifact
           path: build/
+
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: windows-artifact
+          path: build/
+          merge-multiple: true
