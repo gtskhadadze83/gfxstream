@@ -5,6 +5,7 @@ on:
   push:
     branches-ignore:
       - main  # push events to main branch occur after PRs are merged, when the same checks were run
+  workflow_dispatch:
 
 concurrency:
   # limits the workflow to a single run per branch/PR
